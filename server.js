@@ -1,26 +1,10 @@
-const express = require('express');
+const app = require('./app');
+const {mongoConnection} = require('./database/configuration')
+const dotenv = require('dotenv').config();
 
-const app = express();
+app.set('port', process.env.PORT || 3000);
 
-const tiposEquipos = [
-    {
-        nombre: 'Computo',
-        estado: true,
-        fechaCreacion: new Date(),
-        fechaActualizacion: new Date()
-    },
-    {
-        nombre: 'Movil',
-        estado: true,
-        fechaCreacion: new Date(),
-        fechaActualizacion: new Date()
-    }    
-]
-
-app.get('/', (req, res) => {
-    return res.status(200).json(tiposEquipos);
-});
-
-app.listen(3000, () => {
-    console.log('Listen on port 3000');
+app.listen(app.get('port'), () => {
+    console.log(`Escuchando en puerto ${app.get('port')}`);
+    mongoConnection();
 });
