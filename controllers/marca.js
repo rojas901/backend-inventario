@@ -1,56 +1,56 @@
-const TipoEquipo = require('../models/tipoEquipo');
+const Marca = require('../models/marca');
 //crear un tipo de equipo
-const createTipoEquipo = async (req, res) => {
-    const tipoEquipo = new TipoEquipo(req.body);
+const createMarca = async (req, res) => {
+    const marca = new Marca(req.body);
     try {
-        await tipoEquipo.save();
-        res.status(200).json(tipoEquipo)
+        await marca.save();
+        res.status(200).json(marca);
     } catch (error) {
         console.log(error);
     }
 }
 
 //consulta todos los tipos de equipo
-const getTiposEquipos = async (req, res) => {
+const getMarcas = async (req, res) => {
     try {
-        const tiposEquipo = await TipoEquipo.find();
-        res.status(200).json(tiposEquipo)
+        const marcas = await Marca.find();
+        res.status(200).json(marcas);
     } catch (error) {
         console.log(error);
     }
 }
 
 //consulta un tipo de equipo por ID
-const getTipoEquipoByID = async (req, res) => {
+const getMarcaByID = async (req, res) => {
     const id = req.url.slice(1, req.url.length);
     try {
-        const tipoEquipo = await TipoEquipo.findById(id);
-        res.status(200).json(tipoEquipo);
+        const marca = await Marca.findById(id);
+        res.status(200).json(marca);
     } catch (error) {
         console.log(error);
     }
 }
 
 //actualizar un tipo de equipo por ID
-const updateTipoEquipoByID = async (req, res) => {
+const updateMarcaByID = async (req, res) => {
     const id = req.url.slice(1, req.url.length);
     try {
-        let tipoEquipo = await TipoEquipo.findByIdAndUpdate(
+        let marca = await Marca.findByIdAndUpdate(
             id, 
             {...req.body, fechaActualizacion: new Date().toLocaleString()}, 
             {returnOriginal: false}
         );
-        res.status(200).json(tipoEquipo);    
+        res.status(200).json(marca);    
     } catch (error) {
         console.log(error);
     }
 }
 
 //borra un tipo de equipo por ID
-const deleteTipoEquipoByID = async (req, res) => {
+const deleteMarcaByID = async (req, res) => {
     const id = req.url.slice(1, req.url.length);
     try {
-        await TipoEquipo.findByIdAndDelete(id);
+        await Marca.findByIdAndDelete(id);
         res.status(200).json({msg: `Se ha borrado el tipo de equipo: ${id}`});
     } catch (error) {
         console.log(error);
@@ -58,9 +58,9 @@ const deleteTipoEquipoByID = async (req, res) => {
 }
 
 module.exports = {
-    createTipoEquipo, 
-    getTiposEquipos, 
-    getTipoEquipoByID, 
-    updateTipoEquipoByID, 
-    deleteTipoEquipoByID
+    createMarca, 
+    getMarcas, 
+    getMarcaByID, 
+    updateMarcaByID, 
+    deleteMarcaByID
 }
