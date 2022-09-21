@@ -1,59 +1,65 @@
 const Usuario = require('../models/usuario');
-//crear un tipo de equipo
+
 const createUsuario = async (req, res) => {
     const usuario = new Usuario(req.body);
     try {
-        await usuario.save();
-        res.status(200).json(usuario);
+        if (await Usuario.findOne({$or: [{nombre: req.body.nombre}, {email: req.body.email}]})) {
+            return res.status(200).json({msg: 'El usuario ya existe.'});
+        }else {
+            await usuario.save();
+            return res.status(200).json(usuario);
+        }
     } catch (error) {
         console.log(error);
+        return res.status(400).json({msg: 'Petición invalida'});
     }
 }
 
-//consulta todos los tipos de equipo
 const getUsuarios = async (req, res) => {
     try {
-        const usuario = await Usuario.find();
-        res.status(200).json(usuario);
+        const usuario = await Usuario.find({estado: true});
+        return res.status(200).json(usuario);
     } catch (error) {
         console.log(error);
+        return res.status(400).json({msg: 'Petición invalida'});
     }
 }
 
-//consulta un tipo de equipo por ID
 const getUsuarioByID = async (req, res) => {
-    const id = req.url.slice(1, req.url.length);
     try {
-        const usuario = await Usuario.findById(id);
-        res.status(200).json(usuario);
+        const usuario = await Usuario.findOne({_id: req.params.id, estado:true});
+        return res.status(200).json(usuario);
     } catch (error) {
         console.log(error);
+        return res.status(400).json({msg: 'Petición invalida'});
     }
 }
 
-//actualizar un tipo de equipo por ID
 const updateUsuarioByID = async (req, res) => {
-    const id = req.url.slice(1, req.url.length);
     try {
-        let usuario = await Usuario.findByIdAndUpdate(
-            id, 
+        const usuario = await Usuario.findByIdAndUpdate(
+            req.params.id, 
             {...req.body, fechaActualizacion: new Date().toLocaleString()}, 
             {returnOriginal: false}
         );
-        res.status(200).json(usuario);    
+        return res.status(200).json(usuario);    
     } catch (error) {
         console.log(error);
+        return res.status(400).json({msg: 'Petición invalida'});
     }
 }
 
 //borra un tipo de equipo por ID
 const deleteUsuarioByID = async (req, res) => {
-    const id = req.url.slice(1, req.url.length);
     try {
-        await Usuario.findByIdAndDelete(id);
-        res.status(200).json({msg: `Se ha borrado el usuario: ${id}`});
+        if (await Usuario.findByIdAndDelete(req.params.id)) {
+            return res.status(200).json({msg: `Se ha borrado el usuario: ${req.params.id}`});
+        }else {
+            return res.status(404).json({msg: 'El usuario no existe.'});
+        }        
     } catch (error) {
         console.log(error);
+        return res.status(400).json({msg: 'Petición invalida'});
     }
 }
 
