@@ -34,4 +34,10 @@ app.use('/api/usuarios', usuario);
 app.use('/api/marcas', marca);
 app.use('/api/inventarios', inventario);
 
+app.get("*", (req, res) => {
+    return res.status(404).json({
+        msg: 'pagina no encontrada'
+    });
+});
+
 module.exports = app;
