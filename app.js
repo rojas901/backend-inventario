@@ -2,6 +2,9 @@ const express = require('express');
 
 const app = express();
 //TODO: importa y habilitar cors
+const cors = require('cors');
+
+const fileUpload = require('express-fileupload');
 
 //importacion de rutas
 const tipoEquipo = require('./routes/tipoEquipo');
@@ -14,7 +17,16 @@ const inventario = require('./routes/inventario');
 //TODO: middleware para urlencoded
 app.use(express.json());
 //TODO: middleware subida de foto
+app.use(express.urlencoded({extended: false}));
+
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
 //TODO: middleware de cors
+app.use(cors({
+    origin: '*'
+}));
 
 app.use('/api/tipoequipos', tipoEquipo);
 app.use('/api/estadoequipos', estadoEquipo);
