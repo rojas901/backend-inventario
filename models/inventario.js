@@ -19,7 +19,7 @@ const InventarioSchema = Schema({
     },
     fotoEquipo: {
         type: String,
-        required: [true, 'Foto equipo requerido']
+        default: 'www.foto.com'
     },
     color: {
         type: String,
@@ -30,7 +30,7 @@ const InventarioSchema = Schema({
         default: new Date().toLocaleString()
     },
     precio: {
-        type: Number,
+        type: String,
         required: [true, 'Precio equipo requerido']
     },
     usuario: {
