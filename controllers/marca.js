@@ -17,7 +17,7 @@ const createMarca = async (req, res) => {
 
 const getMarcas = async (req, res) => {
     try {
-        const marcas = await Marca.find({estado:true});
+        const marcas = await Marca.find();
         return res.status(200).json(marcas);
     } catch (error) {
         console.log(error);

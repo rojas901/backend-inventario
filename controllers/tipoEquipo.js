@@ -19,7 +19,7 @@ const createTipoEquipo = async (req, res) => {
 //consulta todos los tipos de equipo
 const getTiposEquipos = async (req, res) => {
     try {
-        const tiposEquipo = await TipoEquipo.find({estado: true});
+        const tiposEquipo = await TipoEquipo.find();
         return res.status(200).json(tiposEquipo)
     } catch (error) {
         console.log(error);

@@ -17,7 +17,7 @@ const createUsuario = async (req, res) => {
 
 const getUsuarios = async (req, res) => {
     try {
-        const usuario = await Usuario.find({estado: true});
+        const usuario = await Usuario.find();
         return res.status(200).json(usuario);
     } catch (error) {
         console.log(error);

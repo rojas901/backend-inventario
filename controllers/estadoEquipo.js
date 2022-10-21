@@ -17,7 +17,7 @@ const createEstadoEquipo = async (req, res) => {
 
 const getEstadosEquipos = async (req, res) => {
     try {
-        const estadosEquipo = await EstadoEquipo.find({estado: true});
+        const estadosEquipo = await EstadoEquipo.find();
         return res.status(200).json(estadosEquipo);
     } catch (error) {
         console.log(error);
