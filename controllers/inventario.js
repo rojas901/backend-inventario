@@ -19,10 +19,12 @@ const createInventario = async (req, res) => {
 const getInventarios = async (req, res) => {
     try {
         const inventario = await Inventario.find().
-        populate({path: 'usuario', select: 'nombre'}).
-        populate({path: 'tipo', select: 'nombre'}).
-        populate({path: 'estado', select: 'nombre'}).
-        populate({path: 'marca', select: 'nombre'});
+        populate([
+            {path: 'usuario', select: 'nombre'},
+            {path: 'tipo', select: 'nombre'},
+            {path: 'estado', select: 'nombre'},
+            {path: 'marca', select: 'nombre'}
+        ]);
         return res.status(200).json(inventario);
     } catch (error) {
         console.log(error);
