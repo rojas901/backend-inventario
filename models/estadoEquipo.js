@@ -11,12 +11,12 @@ const EstadoEquipoSchema = Schema({
         required: true
     },
     fechaCreacion: {
-        type: String,
-        default: new Date().toLocaleString()
+        type: Date,
+        default: new Date()
     },
     fechaActualizacion: {
-        type: String,
-        default: new Date().toLocaleString()
+        type: Date,
+        default: new Date()
     }
 });
 

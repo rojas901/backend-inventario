@@ -26,11 +26,11 @@ const InventarioSchema = Schema({
         required: [true, 'Color equipo requerido']
     },
     fechaCompra: {
-        type: String,
-        default: new Date().toLocaleString()
+        type: Date,
+        default: new Date()
     },
     precio: {
-        type: String,
+        type: Number,
         required: [true, 'Precio equipo requerido']
     },
     usuario: {

@@ -48,7 +48,7 @@ const getInventarioByID = async (req, res) => {
 
 const updateInventarioByID = async (req, res) => {
     if (req.body.fechaCompra) {
-        fechaDeCompra = new Date(req.body.fechaCompra).toLocaleString();
+        fechaDeCompra = new Date(req.body.fechaCompra);
         newBody = {...req.body, fechaCompra: fechaDeCompra}
     }
     try {
