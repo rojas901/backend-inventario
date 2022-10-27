@@ -1,7 +1,7 @@
 const Inventario = require('../models/inventario');
 
 const createInventario = async (req, res) => {
-    const fechaDeCompra = new Date(req.body.fechaCompra).toLocaleString();
+    const fechaDeCompra = new Date(req.body.fechaCompra);
     const inventario = new Inventario({...req.body, fechaCompra: fechaDeCompra});
     try {           
         if (await Inventario.findOne({serial: req.body.serial})) {
