@@ -34,11 +34,7 @@ const getInventarios = async (req, res) => {
 
 const getInventarioByID = async (req, res) => {
     try {
-        const inventario = await Inventario.findById(req.params.id).
-        populate({path: 'usuario', select: 'nombre'}).
-        populate({path: 'tipo', select: 'nombre'}).
-        populate({path: 'estado', select: 'nombre'}).
-        populate({path: 'marca', select: 'nombre'});
+        const inventario = await Inventario.findById(req.params.id);
         return res.status(200).json(inventario);
     } catch (error) {
         console.log(error);
