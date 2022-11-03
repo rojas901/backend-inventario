@@ -39,7 +39,7 @@ const updateMarcaByID = async (req, res) => {
     try {
         const marca = await Marca.findByIdAndUpdate(
             req.params.id, 
-            {...req.body, fechaActualizacion: new Date()}, 
+            {...req.body, fechaActualizacion: Date.now()}, 
             {returnOriginal: false}
         );
         return res.status(200).json(marca);    

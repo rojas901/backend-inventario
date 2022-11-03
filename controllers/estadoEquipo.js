@@ -39,7 +39,7 @@ const updateEstadoEquipoByID = async (req, res) => {
     try {
         const estadoEquipo = await EstadoEquipo.findByIdAndUpdate(
             req.params.id, 
-            {...req.body, fechaActualizacion: new Date()}, 
+            {...req.body, fechaActualizacion: Date.now()}, 
             {returnOriginal: false}
         );
         return res.status(200).json(estadoEquipo);    

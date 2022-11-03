@@ -27,7 +27,7 @@ const InventarioSchema = Schema({
     },
     fechaCompra: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
     precio: {
         type: Number,

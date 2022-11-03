@@ -39,7 +39,7 @@ const updateUsuarioByID = async (req, res) => {
     try {
         const usuario = await Usuario.findByIdAndUpdate(
             req.params.id, 
-            {...req.body, fechaActualizacion: new Date()}, 
+            {...req.body, fechaActualizacion: Date.now()}, 
             {returnOriginal: false}
         );
         return res.status(200).json(usuario);    
