@@ -7,7 +7,17 @@ const UsuarioSchema = Schema({
     },
     email: {
         type: String,
-        required: [true, 'Email usuario requerido']
+        required: [true, 'Email usuario requerido'],
+        unique: true
+    },
+    contrasena: {
+        type: String,
+        required: [true, 'Contrasena usuario requerido']
+    },
+    rol: {
+        type: String,
+        required: [true, 'Rol usuario requerido'],
+        enum: ['Administrador', 'Docente']
     },
     estado: {
         type: Boolean,

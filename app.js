@@ -12,6 +12,7 @@ const estadoEquipo = require('./routes/estadoEquipo');
 const usuario = require('./routes/usuario');
 const marca = require('./routes/marca');
 const inventario = require('./routes/inventario');
+const login = require('./routes/auth');
 
 //middlewares
 //TODO: middleware para urlencoded
@@ -28,6 +29,7 @@ app.use(cors({
     origin: '*'
 }));
 
+app.use('/api/login', login);
 app.use('/api/tipoequipos', tipoEquipo);
 app.use('/api/estadoequipos', estadoEquipo);
 app.use('/api/usuarios', usuario);
