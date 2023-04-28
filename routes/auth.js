@@ -17,13 +17,13 @@ router.post('/', [
     }
 
     const usuario = await Usuario.findOne({email: req.body.email});
-    if (!usuario) {
-      return res.status(400).json({msg: 'Usuario no encontrado'})
+    if (!usuario || usuario.estado === false) {
+      return res.status(400).json({msg: 'Usuario y/o contraseña invalida'})
     }
 
     const esIgual = bcrypt.compareSync(req.body.contrasena, usuario.contrasena);
     if (!esIgual) {
-      return res.status(400).json({msg: 'Usuario no encontrado'});
+      return res.status(400).json({msg: 'Usuario y/o contraseña invalida'});
     }
 
     const token = generarJWT(usuario);
